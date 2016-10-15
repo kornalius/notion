@@ -33,6 +33,7 @@
     "moment": false,
     "CircularJSON": false,
     "URI": false,
+    "riot": false,
     "PIXI": false,
     "Wad": false,
     "Buffer": false,
@@ -48,7 +49,10 @@
     "standard"
   ],
 
-  "plugins": [],
+  "plugins": [
+    "html",
+    "riot"
+  ],
 
   "rules": {
     "arrow-parens": [

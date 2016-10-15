@@ -1,1 +1,5 @@
 desktop
+
+  script.
+
+    this.cells = []

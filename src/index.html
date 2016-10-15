@@ -9,274 +9,70 @@
 
   <title>Notion</title>
 
-  <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/uikit.almost-flat.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/components/autocomplete.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/components/sortable.min.css">
 
-  <style type="text/css">
+  <link rel="stylesheet" type="text/css" href="assets/codemirror/lib/codemirror.css">
 
-    .hidden.menu {
-      display: none;
-    }
+  <link rel="stylesheet" type="text/css" href="assets/codemirror/addon/dialog/dialog.css">
+  <link rel="stylesheet" type="text/css" href="assets/codemirror/addon/fold/foldgutter.css">
+  <link rel="stylesheet" type="text/css" href="assets/codemirror/addon/hint/show-hint.css">
+  <link rel="stylesheet" type="text/css" href="assets/codemirror/addon/scroll/simplescrollbars.css">
 
-    .masthead.segment {
-      min-height: 700px;
-      padding: 1em 0em;
-    }
-    .masthead .logo.item img {
-      margin-right: 1em;
-    }
-    .masthead .ui.menu .ui.button {
-      margin-left: 0.5em;
-    }
-    .masthead h1.ui.header {
-      margin-top: 3em;
-      margin-bottom: 0em;
-      font-size: 4em;
-      font-weight: normal;
-    }
-    .masthead h2 {
-      font-size: 1.7em;
-      font-weight: normal;
-    }
+  <link rel="stylesheet" type="text/css" href="assets/codemirror/theme/ttcn.css">
 
-    .ui.vertical.stripe {
-      padding: 8em 0em;
-    }
-    .ui.vertical.stripe h3 {
-      font-size: 2em;
-    }
-    .ui.vertical.stripe .button + h3,
-    .ui.vertical.stripe p + h3 {
-      margin-top: 3em;
-    }
-    .ui.vertical.stripe .floated.image {
-      clear: both;
-    }
-    .ui.vertical.stripe p {
-      font-size: 1.33em;
-    }
-    .ui.vertical.stripe .horizontal.divider {
-      margin: 3em 0em;
-    }
+  <style type="riot"></style>
 
-    .quote.stripe.segment {
-      padding: 0em;
-    }
-    .quote.stripe.segment .grid .column {
-      padding-top: 5em;
-      padding-bottom: 5em;
-    }
+  <script src="index.js"></script>
 
-    .footer.segment {
-      padding: 5em 0em;
-    }
+  <script src="assets/js/uikit.min.js"></script>
+  <script src="assets/js/components/autocomplete.min.js"></script>
+  <script src="assets/js/components/sortable.min.js"></script>
 
-    .secondary.pointing.menu .toc.item {
-      display: none;
-    }
+  <script src="assets/js/rg.min.js"></script>
+  <script src="assets/js/commonmark.min.js"></script>
 
-    @media only screen and (max-width: 700px) {
-      .ui.fixed.menu {
-        display: none !important;
-      }
-      .secondary.pointing.menu .item,
-      .secondary.pointing.menu .menu {
-        display: none;
-      }
-      .secondary.pointing.menu .toc.item {
-        display: block;
-      }
-      .masthead.segment {
-        min-height: 350px;
-      }
-      .masthead h1.ui.header {
-        font-size: 2em;
-        margin-top: 1.5em;
-      }
-      .masthead h2 {
-        margin-top: 0.5em;
-        font-size: 1.5em;
-      }
-    }
-  </style>
+  <script src="assets/codemirror/lib/codemirror.js"></script>
 
+  <script src="assets/codemirror/addon/comment/comment.js"></script>
+  <script src="assets/codemirror/addon/dialog/dialog.js"></script>
+  <script src="assets/codemirror/addon/fold/foldcode.js"></script>
+  <script src="assets/codemirror/addon/fold/comment-fold.js"></script>
+  <script src="assets/codemirror/addon/fold/brace-fold.js"></script>
+  <script src="assets/codemirror/addon/fold/foldgutter.js"></script>
+  <script src="assets/codemirror/addon/fold/markdown-fold.js"></script>
+  <script src="assets/codemirror/addon/search/search.js"></script>
+  <script src="assets/codemirror/addon/search/searchcursor.js"></script>
+  <script src="assets/codemirror/addon/search/jump-to-line.js"></script>
+  <script src="assets/codemirror/addon/search/match-highlighter.js"></script>
+  <script src="assets/codemirror/addon/search/matchesonscrollbar.js"></script>
+  <script src="assets/codemirror/addon/scroll/annotatescrollbar.js"></script>
+  <script src="assets/codemirror/addon/scroll/simplescrollbars.js"></script>
+  <script src="assets/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="assets/codemirror/addon/edit/closebrackets.js"></script>
+  <script src="assets/codemirror/addon/edit/trailingspace.js"></script>
+  <script src="assets/codemirror/addon/hint/show-hint.js"></script>
+  <script src="assets/codemirror/addon/hint/javascript-hint.js"></script>
+  <script src="assets/codemirror/addon/hint/anyword-hint.js"></script>
+  <script src="assets/codemirror/addon/selection/active-line.js"></script>
+  <script src="assets/codemirror/addon/selection/mark-selection.js"></script>
+
+  <script src="assets/codemirror/mode/javascript/javascript.js"></script>
+
+  <script src="assets/codemirror/keymap/sublime.js"></script>
+
+  <script src="components.js"></script>
 </head>
 
 <body>
   <span id="browser-sync-binding"></span>
 
-  <script src="index.js"></script>
-
-  <script src="css/semantic.min.js"></script>
-
-  <script src="components/app.js"></script>
-  <script src="components/desktop.js"></script>
-  <script src="components/document.js"></script>
-  <script src="components/cell.js"></script>
-
-  <script>
-    $(document).ready(function() {
-      // fix menu when passed
-      $('.masthead').visibility({
-        once: false,
-        onBottomPassed: function () {
-          $('.fixed.menu').transition('fade in');
-        },
-        onBottomPassedReverse: function () {
-          $('.fixed.menu').transition('fade out');
-        }
-      });
-
-      // create sidebar and attach to menu open
-      $('.ui.sidebar').sidebar('attach events', '.toc.item');
-    });
-  </script>
-
   <app></app>
 
-  <script>riot.mount('*')</script>
-
-  <!-- Following Menu -->
-  <div class="ui large top fixed hidden menu">
-    <div class="ui container">
-      <a class="active item">Home</a>
-      <a class="item">Work</a>
-      <a class="item">Company</a>
-      <a class="item">Careers</a>
-      <div class="right menu">
-        <div class="item">
-          <a class="ui button">Log in</a>
-        </div>
-        <div class="item">
-          <a class="ui primary button">Sign Up</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sidebar Menu -->
-  <div class="ui vertical inverted sidebar menu">
-    <a class="active item">Home</a>
-    <a class="item">Work</a>
-    <a class="item">Company</a>
-    <a class="item">Careers</a>
-    <a class="item">Login</a>
-    <a class="item">Signup</a>
-  </div>
-
-
-  <!-- Page Contents -->
-  <div class="pusher">
-    <div class="ui inverted vertical masthead center aligned segment">
-
-      <div class="ui container">
-        <div class="ui large secondary inverted pointing menu">
-          <a class="toc item">
-            <i class="sidebar icon"></i>
-          </a>
-          <a class="active item">Home</a>
-          <a class="item">Work</a>
-          <a class="item">Company</a>
-          <a class="item">Careers</a>
-          <div class="right item">
-            <a class="ui inverted button">Log in</a>
-            <a class="ui inverted button">Sign Up</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="ui text container">
-        <h1 class="ui inverted header">
-          Imagine-a-Company
-        </h1>
-        <h2>Do whatever you want when you want to.</h2>
-        <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
-      </div>
-
-    </div>
-
-    <div class="ui vertical stripe segment">
-      <div class="ui middle aligned stackable grid container">
-        <div class="row">
-          <div class="eight wide column">
-            <h3 class="ui header">We Help Companies and Companions</h3>
-            <p>We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics.</p>
-            <h3 class="ui header">We Make Bananas That Can Dance</h3>
-            <p>Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.</p>
-          </div>
-          <div class="six wide right floated column">
-            <img src="assets/images/wireframe/white-image.png" class="ui large bordered rounded image">
-          </div>
-        </div>
-        <div class="row">
-          <div class="center aligned column">
-            <a class="ui huge button">Check Them Out</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="ui vertical stripe quote segment">
-      <div class="ui equal width stackable internally celled grid">
-        <div class="center aligned row">
-          <div class="column">
-            <h3>"What a Company"</h3>
-            <p>That is what they all say about us</p>
-          </div>
-          <div class="column">
-            <h3>"I shouldn't have gone with their competitor."</h3>
-            <p>
-              <img src="assets/images/avatar/nan.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ui vertical stripe segment">
-      <div class="ui text container">
-        <h3 class="ui header">Breaking The Grid, Grabs Your Attention</h3>
-        <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
-        <a class="ui large button">Read More</a>
-        <h4 class="ui horizontal header divider">
-          <a href="#">Case Studies</a>
-        </h4>
-        <h3 class="ui header">Did We Tell You About Our Bananas?</h3>
-        <p>Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but its really true. It took years of gene splicing and combinatory DNA research, but our bananas can really dance.</p>
-        <a class="ui large button">I'm Still Quite Interested</a>
-      </div>
-    </div>
-
-
-    <div class="ui inverted vertical footer segment">
-      <div class="ui container">
-        <div class="ui stackable inverted divided equal height stackable grid">
-          <div class="three wide column">
-            <h4 class="ui inverted header">About</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Sitemap</a>
-              <a href="#" class="item">Contact Us</a>
-              <a href="#" class="item">Religious Ceremonies</a>
-              <a href="#" class="item">Gazebo Plans</a>
-            </div>
-          </div>
-          <div class="three wide column">
-            <h4 class="ui inverted header">Services</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Banana Pre-Order</a>
-              <a href="#" class="item">DNA FAQ</a>
-              <a href="#" class="item">How To Access</a>
-              <a href="#" class="item">Favorite X-Men</a>
-            </div>
-          </div>
-          <div class="seven wide column">
-            <h4 class="ui inverted header">Footer Header</h4>
-            <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <script>
+    riot.mount('*')
+  </script>
 
 </body>
 

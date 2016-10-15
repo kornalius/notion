@@ -19,11 +19,11 @@ function onError (err) {
   this.emit('end')
 }
 
-gulp.task('build-js', (done) => {
+gulp.task('build-js', done => {
   glob('./src/index.js', (err, files) => {
     if (err) done(err)
 
-    let tasks = files.map((entry) => {
+    let tasks = files.map(entry => {
       return browserify({
           entries: [entry],
           ignoreMissing: true,
@@ -41,55 +41,49 @@ gulp.task('build-js', (done) => {
         .on('error', onError)
         .pipe(gulp.dest('./build'))
     })
-
     es.merge(tasks).on('end', done)
   })
 })
 
-gulp.task('build-html', (done) => {
-  glob('./src/**/*.html', (err, files) => {
-    if (err) done(err)
-
-    let tasks = files.map((entry) => {
-      return gulp.src(entry)
-        .pipe(gulp.dest('./build'))
-    })
-
-    es.merge(tasks).on('end', done)
-  })
+gulp.task('build-html', done => {
+  let tasks = [
+    gulp.src('./src/**/*.html')
+      .pipe(gulp.dest('./build'))
+  ]
+  es.merge(tasks).on('end', done)
 })
 
-gulp.task('build-assets', (done) => {
+gulp.task('build-css', done => {
+  let tasks = [
+    gulp.src('./css/**/*.css')
+      .pipe(gulp.dest('./build'))
+  ]
+  es.merge(tasks).on('end', done)
+})
+
+gulp.task('build-assets', done => {
   let tasks = [
     gulp.src('./assets/**/*')
       .pipe(gulp.dest('./build/assets'))
   ]
-
   es.merge(tasks).on('end', done)
 })
 
-gulp.task('build-semantic', (done) => {
+gulp.task('build-riot', done => {
   let tasks = [
-    gulp.src('./semantic/dist/semantic.min.*')
-      .pipe(gulp.dest('./build/css'))
-  ]
-
-  es.merge(tasks).on('end', done)
-})
-
-gulp.task('build-riot', ()=> {
-  gulp.src('./src/**/*.tag')
+    gulp.src('./src/components/**/*.tag')
       .pipe(riot({
         expr: true,
         type: 'babel',
         template: 'pug',
-        parsers: {
-          css: 'scss',
-          js: 'babel',
-          html: 'pug',
-        }
+        style: 'scss',
       }))
-      .pipe(gulp.dest('./build'));
+      .on('error', onError)
+      .pipe(concat('components.js'))
+      .on('error', onError)
+      .pipe(gulp.dest('./build'))
+  ]
+  es.merge(tasks).on('end', done)
 })
 
 gulp.task('watch', () => {
@@ -115,22 +109,16 @@ gulp.task('watch', () => {
       //}
     }
   })
-  gulp.watch('./src/**/*.js', { debounceDelay: 500 }, (e) => {
-    gulp.start('build-js', reload)
-  })
-  gulp.watch('./src/**/*.html', { debounceDelay: 500 }, (e) => {
-    gulp.start('build-html', reload)
-  })
-  gulp.watch('./src/**/*.tag', { debounceDelay: 500 }, (e) => {
-    gulp.start('build-riot', reload)
-  })
-  gulp.watch('./assets/**/*', { debounceDelay: 500 }, (e) => {
-    gulp.start('build-assets', reload)
-  })
+
+  gulp.watch('./src/**/*.js', { debounceDelay: 500 }, e => gulp.start('build-js', reload) )
+  gulp.watch('./css/**/*.css', { debounceDelay: 500 }, e => gulp.start('build-css', reload) )
+  gulp.watch('./src/**/*.html', { debounceDelay: 500 }, e => gulp.start('build-html', reload) )
+  gulp.watch('./src/**/*.tag', { debounceDelay: 500 }, e => gulp.start('build-riot', reload) )
+  gulp.watch('./assets/**/*', { debounceDelay: 500 }, e => gulp.start('build-assets', reload) )
 })
 
 
-gulp.task('build-client', ['build-assets', 'build-semantic', 'build-html', 'build-js', 'build-riot'])
+gulp.task('build-client', ['build-assets', 'build-riot', 'build-css', 'build-html', 'build-js'])
 
 gulp.task('build', ['build-client'])
 
